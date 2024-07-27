@@ -1,4 +1,6 @@
+<img width="10%" src="./embed.png" alt="Embed CLI" style="float:left; margin-right: 10px" ></img>
 # Embed CLI Tool
+
 
 `embed` is a command-line tool for generating semantic embeddings from text using either the `sentence-transformers` library or OpenAI's embedding models. It supports various pre-trained models and provides options for customizing the output format and destination.
 
