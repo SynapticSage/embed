@@ -2,7 +2,7 @@
 SCRIPT_NAME = embed.py
 TARGET_DIR = /usr/local/bin
 REQUIREMENTS = requirements.txt
-VENV_DIR = venv
+VENV_DIR = env
 
 # Default target
 all: install
@@ -28,6 +28,7 @@ install: install-deps make-executable install-script
 
 # Uninstall target
 uninstall:
+	rm -f $(VENV_DIR)
 	sudo rm -f $(TARGET_DIR)/embed
 
 # Clean target
