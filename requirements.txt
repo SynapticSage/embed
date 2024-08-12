@@ -1,3 +1,5 @@
 click # for command line interface
 sentence-transformers # for local embeddings
 openai # for OPENAI embeddings
+sklearn # for clustering
+pandas # for data manipulation

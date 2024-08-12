@@ -1,5 +1,5 @@
 # Variables
-SCRIPT_NAME = embed.py
+SCRIPT_NAMES = embed.sh aggocluster.sh
 TARGET_DIR = /usr/local/bin
 REQUIREMENTS = requirements.txt
 VENV_DIR = env
@@ -17,11 +17,13 @@ install-deps: create-venv
 
 # Make the script executable
 make-executable:
-	chmod +x $(SCRIPT_NAME)
+	chmod +x $(SCRIPT_NAMES)
 
-# Move the script to the target directory
+# Move the scripts to the target directory
 install-script:
-	sudo ln -sf $(PWD)/$(SCRIPT_NAME) $(TARGET_DIR)/embed
+	for SCRIPT_NAME in $(SCRIPT_NAMES); do \
+		sudo ln -sf $(PWD)/$$SCRIPT_NAME $(TARGET_DIR)/$$SCRIPT_NAME; \
+	done
 
 # Install target
 install: install-deps make-executable install-script
@@ -29,7 +31,9 @@ install: install-deps make-executable install-script
 # Uninstall target
 uninstall:
 	rm -f $(VENV_DIR)
-	sudo rm -f $(TARGET_DIR)/embed
+	for SCRIPT_NAME in $(SCRIPT_NAMES); do \
+		sudo rm -f $(TARGET_DIR)/$$SCRIPT_NAME; \
+	done
 
 # Clean target
 clean:
@@ -44,9 +48,9 @@ help:
 	@echo "  install        Install dependencies and the script"
 	@echo "  create-venv    Create a virtual environment"
 	@echo "  install-deps   Install Python dependencies"
-	@echo "  make-executable  Make the script executable"
-	@echo "  install-script Move the script to $(TARGET_DIR)"
-	@echo "  uninstall      Remove the installed script"
+	@echo "  make-executable  Make the scripts executable"
+	@echo "  install-script Move the scripts to $(TARGET_DIR)"
+	@echo "  uninstall      Remove the installed scripts"
 	@echo "  clean          Clean up temporary files"
 	@echo "  help           Display this help message"
 
